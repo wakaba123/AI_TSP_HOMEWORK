@@ -19,6 +19,8 @@ class Greedy:
         while len(self.path) < self.num:
             # print(self.path)
             for i, var in enumerate(temp_line):      # 寻找每个点以后的最邻近节点
+                if len(self.path) != self.num - 1 and i + 1 == 1:
+                    continue
                 if var < min_var and i + 1 not in self.path:
                     min_num = i
                     min_var = var

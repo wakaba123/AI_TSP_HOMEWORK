@@ -15,6 +15,7 @@ for i in range(num):
         graph[i][j] = length
         graph[j][i] = length
         f.write('('+str(i)+','+str(j)+','+str(length)+')'+'\n')
+f.close()
 print("success")
 
 
