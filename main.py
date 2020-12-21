@@ -7,6 +7,7 @@ def creat_graph(edges, num):
     a = [[int(INF) for i in range(num + 1)] for j in range(num + 1)]  # 创建一个二维数组
     for i in edges:
         a[int(i[1])-1][int(i[3])-1] = int(i[5]) # 将二维数组根据边的长度初始化
+        a[int(i[3])-1][int(i[1])-1] = int(i[5])
     return a
 
 
