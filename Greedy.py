@@ -19,12 +19,12 @@ class Greedy:
         while len(self.path) < self.num:
             # print(self.path)
             for i, var in enumerate(temp_line):      # 寻找每个点以后的最邻近节点
-                if len(self.path) != self.num - 1 and i + 1 == 1:
+                if len(self.path) != self.num - 1 and i  == 0:
                     continue
-                if var < min_var and i + 1 not in self.path:
+                if var < min_var and i not in self.path:
                     min_num = i
                     min_var = var
-            self.path.append(min_num + 1)   # 将其添加进路径
+            self.path.append(min_num)   # 将其添加进路径
             sum_num += min_var
             min_var = 1e10
             temp_line = self.graph[min_num]  # 跳到下一个节点
@@ -33,7 +33,7 @@ class Greedy:
     def print_outcome(self):
         num = self.calculate()
         print("近似最短路径长度为 " + str(num))
-        print(1, end='')
+        print(0, end='')
         for i in self.path:
             print("->", end='')
             print(i, end='')
