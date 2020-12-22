@@ -33,7 +33,7 @@ class yichuan():
         indx = np.random.choice(np.arange(self.pop_size), size=self.pop_size, replace=True,
                                     p=(fitness / fitness.sum()))
 
-        #花式索引，更新种群
+        #更新种群
         self.pop = self.pop[indx]
 
     def genetic_crossover(self):
