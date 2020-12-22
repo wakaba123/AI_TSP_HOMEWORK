@@ -11,6 +11,7 @@ class yichuan():
         self.DNA_size = DNA_size#城市大小
         self.graph = graph#距离矩阵
         print(self.pop)
+        print(self.graph)
 
 
 
@@ -20,8 +21,9 @@ class yichuan():
         fitness = np.zeros(self.pop_size, dtype=np.float32)
         # 枚举每个个体
         for i, e in enumerate(pop):
-            for j in range(self.DNA_size - 1):
-                fitness[i] += self.graph[int(e[j])][int(e[j + 1])]
+            for j in range(self.DNA_size-1):
+                print(fitness)
+                fitness[i] += self.graph[j][int(e[j+1])]
         # 记录距离
         dis = copy.copy(fitness)
         # 适应度等于距离的倒数
@@ -84,7 +86,7 @@ def init_pop(pop_size, DNA_size):
         code = np.arange(DNA_size)
         for i in range(pop_size):
             pop[i] = copy.deepcopy(code)
-            # 随机打乱函数
+            # 随机打乱
             np.random.shuffle(pop[i])
         # 返回种群
         return pop

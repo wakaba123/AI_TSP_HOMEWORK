@@ -13,7 +13,7 @@ def creat_graph(edges, num):
     c = 0
     for i in edges:
         i = i.strip().lstrip('(').rstrip(')\n').split(',')
-        print(i[2])
+       # print(i[2])
         if b[int(i[0])] == 0:
             b[int(i[0])] = 1
             c += 1
@@ -29,13 +29,13 @@ with open("graphs.txt", "r") as f:
     num = f.readline()
     num = int(num)
     lines = f.readlines()
-    graph,number = creat_graph(lines, num)[:]  # 将得到的图保存在graph中
+    graph,number = creat_graph(lines, num)[:]  # 将得到的图保存在graph中,城市数量
 
 
 if __name__ == '__main__':
     #ans = Greedy(graph, num)
     # ans.calculate()
    # ans.print_outcome()
-    TSP(graph,400,number,10000)
+    TSP(graph,number,number,1)
 
 
