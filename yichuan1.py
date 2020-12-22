@@ -10,25 +10,22 @@ class yichuan():
         self.pop_size = pop_size#种群大小
         self.DNA_size = DNA_size#城市大小
         self.graph = graph#距离矩阵
-        print(self.pop)
-        print(self.graph)
 
 
 
 
-    def compute_fitness(self, pop,number):
+    def compute_fitness(self, pop):
         # 初始化一个空表
         fitness = np.zeros(self.pop_size, dtype=np.float32)
         # 枚举每个个体
         for i, e in enumerate(pop):
             for j in range(self.DNA_size-1):
                 print(fitness)
-                fitness[i] += self.graph[j][int(e[j+1])]
+                fitness[i] += self.graph[int(e[j])][int(e[j+1])]
         # 记录距离
         dis = copy.copy(fitness)
         # 适应度等于距离的倒数
         fitness = np.reciprocal(fitness)
-        print(fitness)
         return fitness, dis
 
     # 轮盘赌，选择种群中的个体
@@ -107,7 +104,7 @@ def TSP(graph, pop_size, DNA_size, t):
         for i in range(t):
             # t-=1
             # 返回适应度，和距离函数
-            fitness, dis = GA.compute_fitness(graph,DNA_size)
+            fitness, dis = GA.compute_fitness(pop)
             # 选择新的种群
             GA.select_population(fitness)
             # 基因交叉
@@ -120,7 +117,7 @@ def TSP(graph, pop_size, DNA_size, t):
             # 记录DNA
             DNA = GA.pop[num, :]
             # 打印当前状态
-            print(f"The step is {i} ,the current best distance is {min(dis)} ,fitness is {max(fitness)}")
+            #rint(f"The step is {i} ,the current best distance is {min(dis)} ,fitness is {max(fitness)}")
             lx = []
 
             # DNA转化为记录坐标

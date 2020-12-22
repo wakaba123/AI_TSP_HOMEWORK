@@ -18,7 +18,7 @@ def creat_graph(edges, num):
             b[int(i[0])] = 1
             c += 1
         if b[int(i[1])] == 0:
-            b[int(i[1])] == 1
+            b[int(i[1])] = 1
             c += 1
         a[int(i[0])-1][int(i[1])-1] = float(i[2]) # 将二维数组根据边的长度初始化
         a[int(i[1])-1][int(i[0])-1] = float(i[2])
@@ -36,6 +36,6 @@ if __name__ == '__main__':
     #ans = Greedy(graph, num)
     # ans.calculate()
    # ans.print_outcome()
-    TSP(graph,number,number,1)
+    TSP(graph,400,number,20)
 
 
