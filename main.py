@@ -36,6 +36,6 @@ if __name__ == '__main__':
     #ans = Greedy(graph, num)
     # ans.calculate()
    # ans.print_outcome()
-    TSP(graph,400,number,200)
+    TSP(graph,400,number,20)
 
 

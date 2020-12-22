@@ -3,7 +3,7 @@ import  copy
 np.seterr(divide='ignore',invalid='ignore')
 np.random.seed(114514)
 class yichuan():
-    def __init__(self,pop,pop_size,DNA_size,graph,crossover_rate = 0.06,mutation_rate=0.05):
+    def __init__(self,pop,pop_size,DNA_size,graph,crossover_rate = 0.1555,mutation_rate=0.025):
         self.crossover_rate = crossover_rate#交叉概率
         self.mutation_rate = mutation_rate# 变异概率
         self.pop = pop#种群
@@ -97,10 +97,6 @@ def TSP(graph, pop_size, DNA_size, t):
         best_distance = 1e6
         # 保存最佳路线
         route = None
-        # 保存最佳x坐标
-        x = None
-        # 保存适应度变化曲线
-        fitness_process = []
         for i in range(t):
             # t-=1
             # 返回适应度，和距离函数
@@ -116,21 +112,11 @@ def TSP(graph, pop_size, DNA_size, t):
             num = np.argmax(fitness)
             # 记录DNA
             DNA = GA.pop[num, :]
-            # 打印当前状态
-            #rint(f"The step is {i} ,the current best distance is {min(dis)} ,fitness is {max(fitness)}")
-            lx = []
-
-            # DNA转化为记录坐标
-            fitness_process.append(max(fitness))
-            for i in DNA:
-                i = int(i)
-                lx.append(i)
 
             # 保存最佳方案
             if best_distance > min(dis):
                 best_distance = min(dis)
-                route = DNA = GA.pop[num, :]
-                x = copy.copy(lx)
+                route = DNA
         # 打印最终结果
         print(f"The best route is {route}")
         print(f"The route distance is {best_distance}")
