@@ -19,13 +19,14 @@ class yichuan():
         # 初始化一个空表
         fitness = np.zeros(self.pop_size, dtype=np.float32)
         # 枚举每个个体
-        for i in range(number):
-            for j in range(number):
-                fitness[i] += self.pop[i][j]
+        for i, e in enumerate(pop):
+            for j in range(self.DNA_size - 1):
+                fitness[i] += self.graph[int(e[j])][int(e[j + 1])]
         # 记录距离
         dis = copy.copy(fitness)
         # 适应度等于距离的倒数
         fitness = np.reciprocal(fitness)
+        print(fitness)
         return fitness, dis
 
     # 轮盘赌，选择种群中的个体
