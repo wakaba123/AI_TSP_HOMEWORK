@@ -1,6 +1,8 @@
 import numpy as np
 import  copy
 np.random.seed(114514)
+
+
 class yichuan():
     def __init__(self,pop,pop_size,DNA_size,graph,crossover_rate = 0.1555,mutation_rate=0.025):
         self.crossover_rate = crossover_rate#交叉概率
@@ -9,9 +11,6 @@ class yichuan():
         self.pop_size = pop_size#种群大小
         self.DNA_size = DNA_size#城市大小
         self.graph = graph#距离矩阵
-
-
-
 
     def compute_fitness(self, pop):
         # 初始化一个空表
@@ -75,6 +74,7 @@ class yichuan():
                 position = np.random.randint(self.DNA_size, size=2)
                 e[position[0]], e[position[1]] = e[position[1]], e[position[0]]
 
+
 def init_pop(pop_size, DNA_size):
         # 初始化一个种群 大小为pop_size*DNA_size
         pop = np.zeros((pop_size, DNA_size))
@@ -86,6 +86,7 @@ def init_pop(pop_size, DNA_size):
             np.random.shuffle(pop[i])
         # 返回种群
         return pop
+
 
 def TSP(graph, pop_size, DNA_size, t):
         # 初始化一个种群
