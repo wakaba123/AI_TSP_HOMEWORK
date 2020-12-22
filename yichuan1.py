@@ -3,7 +3,7 @@ import  copy
 np.seterr(divide='ignore',invalid='ignore')
 np.random.seed(114514)
 class yichuan():
-    def __init__(self,pop,pop_size,DNA_size,graph,crossover_rate = 0.1555,mutation_rate=0.025):
+    def __init__(self,pop,pop_size,DNA_size,graph,crossover_rate = 0.06,mutation_rate=0.05):
         self.crossover_rate = crossover_rate#交叉概率
         self.mutation_rate = mutation_rate# 变异概率
         self.pop = pop#种群
@@ -20,7 +20,7 @@ class yichuan():
         # 枚举每个个体
         for i, e in enumerate(pop):
             for j in range(self.DNA_size-1):
-                print(fitness)
+               # print(fitness)
                 fitness[i] += self.graph[int(e[j])][int(e[j+1])]
         # 记录距离
         dis = copy.copy(fitness)
