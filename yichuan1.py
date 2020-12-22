@@ -1,6 +1,5 @@
 import numpy as np
 import  copy
-np.seterr(divide='ignore',invalid='ignore')
 np.random.seed(114514)
 class yichuan():
     def __init__(self,pop,pop_size,DNA_size,graph,crossover_rate = 0.1555,mutation_rate=0.025):
@@ -42,7 +41,7 @@ class yichuan():
         for parent1 in self.pop:
             # 判断是否会基因交叉
             if np.random.rand() < self.crossover_rate:
-                # 寻找父代2
+                # 寻找父代
                 n = np.random.randint(self.pop_size)
                 parent2 = self.pop[n, :]
                 # 随机产生基因交换片段
