@@ -1,8 +1,12 @@
 from Greedy import Greedy
+
+from PSO import Pso
+
 from yichuan1 import yichuan
 import numpy as np
 
 from yichuan1 import TSP
+
 
 INF = 1e10
 
@@ -13,6 +17,7 @@ def creat_graph(edges, num):
     c = 0
     for i in edges:
         i = i.strip().lstrip('(').rstrip(')\n').split(',')
+
        # print(i[2])
         if b[int(i[0])] == 0:
             b[int(i[0])] = 1
@@ -20,6 +25,7 @@ def creat_graph(edges, num):
         if b[int(i[1])] == 0:
             b[int(i[1])] = 1
             c += 1
+
         a[int(i[0])-1][int(i[1])-1] = float(i[2]) # 将二维数组根据边的长度初始化
         a[int(i[1])-1][int(i[0])-1] = float(i[2])
     return a,c#邻接矩阵,城市个数
@@ -33,9 +39,15 @@ with open("graphs.txt", "r") as f:
 
 
 if __name__ == '__main__':
-    #ans = Greedy(graph, num)
-    # ans.calculate()
-   # ans.print_outcome()
-    TSP(graph,400,number,3000)
+
+    # ans = Greedy(graph, num)
+    # ans.output_graph()
+    #
+    # ans.print_outcome()
+    ans = Pso(graph, num, 100)
+    ans.get_bestbird()           #yjq's PSO
+
+    TSP(graph,400,number,3000)   #zyx's GA
+
 
 
