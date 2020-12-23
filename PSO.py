@@ -30,15 +30,15 @@ def multiply(w, v):
 
 
 class Pso:
-    def __init__(self, graph, num, genenration):
+    def __init__(self, graph, num, genenration, group_size):
         self.graph = graph
         self.num = num
         self.generation = genenration
-        self.group = Group(self.graph, self.num, self.generation)
+        self.group_size = group_size
+        self.group = Group(self.graph, self.num, self.generation, self.group_size)
 
     def get_bestbird(self):
         best_fit = 0
-
         for i in range(self.generation):
             temp_bird = self.group.best
             temp_fit = temp_bird.fit
@@ -46,13 +46,11 @@ class Pso:
                 best_bird = temp_bird
                 best_fit = temp_fit
             self.group.upDateBird()
-            self.group.showBest()
-        print("最短近似路径是:",end='')
+            # self.group.showBest()
+        print("最短近似路径是:", end='')
         print(best_bird.addr)
-        print("最短近似路程是",end='')
+        print("最短近似路程是", end='')
         print(1 / best_fit)
-
-
 
 
 class Bird:
@@ -63,7 +61,7 @@ class Bird:
         self.v = []
         self.num = num
         self.fit = calcfit(addr, self.graph)
-        self.bestFit = calcfit(addr, self.graph)
+        self.bestFit = calcfit(self.bestAddr, self.graph)
         self.generation = generation
 
     def switch(self, switchq):
@@ -106,18 +104,17 @@ class Bird:
 
 
 class Group:
-    def __init__(self, graph, num, generation):
+    def __init__(self, graph, num, generation, groupsize):
         self.graph = graph
         self.num = num
         self.generation = generation
-        self.groupSize = 500  # 鸟的个数、粒子个数
+        self.groupSize = groupsize  # 鸟的个数、粒子个数
         self.addrSize = num  # 位置的维度，也就是TSP城市数量
         self.w = 0.25  # w为惯性系数，也就是保留上次速度的程度
         self.pChange = 0.3  # 变异系数pChange
         self.pReverse = 0.3  # 贪婪倒立变异概率
         self.initBirds()
         self.best = self.getBest()
-        self.Gen = 0
 
     def initBirds(self):
         self.group = []
@@ -147,12 +144,11 @@ class Group:
         return sum / len(self.group)
 
     def showBest(self):
-        print(self.Gen, ":", 1 / self.best.fit)
+        print(1 / self.best.fit)
         print(self.best.addr)
 
     # 更新每一只鸟的速度和位置
     def upDateBird(self):
-        self.Gen += 1
         for bird in self.group:
             # g代表group，m代表me，分别代表自己和群组最优、自己最优的差
             deltag = switchB2A(self.best.addr, bird.addr)
