@@ -6,6 +6,7 @@ from yichuan1 import yichuan
 import numpy as np
 
 from yichuan1 import TSP
+from ACO import ACO
 
 
 INF = 1e10
@@ -46,7 +47,8 @@ if __name__ == '__main__':
     # ans.print_outcome()
     ans = Pso(graph, num, 100)
     ans.get_bestbird()           #yjq's PSO
-
+    ans2 = ACO(graph, num)
+    ans2.startAnt(1000)          #zyf's ACO
     TSP(graph,400,number,3000)   #zyx's GA
 
 
