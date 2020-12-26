@@ -1,7 +1,6 @@
 import numpy as np
 import  copy
 import matplotlib.pyplot as plt
-np.random.seed(114514)
 
 
 class yichuan():
@@ -86,8 +85,8 @@ def init_pop(pop_size, DNA_size):
             pop[i] = copy.deepcopy(code)
             # 随机打乱
             np.random.shuffle(pop[i])
-            b = np.where(pop[i] == 0)
-            pop[i][b],pop[i][0] = pop[i][0],pop[i][b]
+            #b = np.where(pop[i] == 0)
+            #pop[i][0],pop[i][b] = pop[i][b],pop[i][0]
         # 返回种群
         return pop
 
@@ -96,40 +95,52 @@ def TSP(graph, pop_size, DNA_size, t):
 
         # 初始化一个种群
         pop = init_pop(pop_size, DNA_size)
+        #print(pop)
         # 调用遗传算法类
         GA = yichuan(pop, pop_size, DNA_size, graph)
         # 保存最佳距离
         best_distance = 1e6
         d = []
+
         # 保存最佳路线
         route = None
+
         for i in range(t):
+            x = 0
             # t-=1
             # 返回适应度，和距离函数
             fitness, dis = GA.compute_fitness(pop)
-            d.append(min(dis))
+            #d.append(min(dis))
             # 选择新的种群
             GA.select_population(fitness)
             # 基因交叉
             GA.genetic_crossover()
             # 基因突变
             GA.genetic_mutation()
+            for k in range(pop_size):
+                b = np.where(pop[k] == 0)
+                pop[k][0], pop[k][b] = pop[k][b], pop[k][0]
+
             # 记录当前状态最优解
             # 返回最优解索引
             num = np.argmax(fitness)
             # 记录DNA
             DNA = GA.pop[num, :]
-
+            #print(DNA)
+            for j in range(DNA_size-1):
+              x += graph[int(DNA[j])][int(DNA[j+1])]
+            d.append(x)
+            #print(d)
             # 保存最佳方案
-            if best_distance > min(dis):
-                best_distance = min(dis)
+            if best_distance > min(d):
+                best_distance = min(d)
                 route = DNA
         # 打印最终结果
         print("遗传算法最短近似路径为：")
         for each in route:
             print(int(each),"->",end= "")
-        print("0")
+        #print("0")
         print("遗传算法最短近似路程为", {best_distance})
-        plt.plot(range(t),d,'r')
+        plt.plot(d,'r')
         plt.show()
 
