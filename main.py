@@ -27,29 +27,31 @@ def creat_graph(edges, num):
             b[int(i[1])] = 1
             c += 1
 
-        a[int(i[0])-1][int(i[1])-1] = float(i[2]) # 将二维数组根据边的长度初始化
+        a[int(i[0])-1][int(i[1])-1] = float(i[2])   # 将二维数组根据边的长度初始化
         a[int(i[1])-1][int(i[0])-1] = float(i[2])
-    return a,c#邻接矩阵,城市个数
+    return a   #邻接矩阵,城市个数
 
 
 with open("graphs.txt", "r") as f:
     num = f.readline()
     num = int(num)
     lines = f.readlines()
-    graph,number = creat_graph(lines, num)[:]  # 将得到的图保存在graph中,城市数量
+    graph = creat_graph(lines, num)[:]  # 将得到的图保存在graph中,城市数量
 
 
 if __name__ == '__main__':
 
-    # ans = Greedy(graph, num)
-    # ans.output_graph()
-    #
-    # ans.print_outcome()
-    ans = Pso(graph, num, 100)
-    ans.get_bestbird()           #yjq's PSO
-    ans2 = ACO(graph, num)
-    ans2.startAnt(1000)          #zyf's ACO
-    TSP(graph,400,number,3000)   #zyx's GA
+    ans0 = Greedy(graph, num)  # greedy
+    ans0.print_outcome()
+
+    ans1 = Pso(graph, num, 10, 10)
+    ans1.get_bestbird()            # yjq's PSO
+    ans1.visualization()
+
+    # ans2 = ACO(graph, num)
+    # ans2.startAnt(1000)          # zyf's ACO
+
+    TSP(graph,400,num,30)        # zyx's GA
 
 
 
