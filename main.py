@@ -46,8 +46,11 @@ if __name__ == '__main__':
     t_end = time.time()
     print("\n贪心算法时间为:%f\n"%(t_end-t_start))
 
-    # ans2 = ACO(graph, num)
-    # ans2.startAnt(1000)          # zyf's ACO
+    t_start = time.time()
+    ans2 = ACO(graph, num)
+    ans2.startAnt(100)
+    t_end = time.time()
+    print("蚁群算法时间为:%f秒\n" % (t_end - t_start))# zyf's ACO
 
     TSP(graph, 400, num, 30)        # zyx's GA
     print()
