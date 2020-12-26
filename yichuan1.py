@@ -21,6 +21,7 @@ class yichuan():
                # print(fitness)
                 fitness[i] += self.graph[int(e[j])][int(e[j+1])]
         # 记录距离
+        #print(fitness)
         dis = copy.copy(fitness)
         # 适应度等于距离的倒数
         fitness = np.reciprocal(fitness)
@@ -84,6 +85,9 @@ def init_pop(pop_size, DNA_size):
             pop[i] = copy.deepcopy(code)
             # 随机打乱
             np.random.shuffle(pop[i])
+            b = np.where(pop[i] == 0)
+            if pop[i][0] != 0:
+                pop[i][b],pop[i][0] = pop[i][0],pop[i][b]
         # 返回种群
         return pop
 
@@ -118,6 +122,8 @@ def TSP(graph, pop_size, DNA_size, t):
                 best_distance = min(dis)
                 route = DNA
         # 打印最终结果
-        print(f"The best route is {route}")
+        for each in route:
+            print(int(each),"->",end="")
+        print("0")
         print(f"The route distance is {best_distance}")
 
