@@ -129,6 +129,7 @@ def TSP(graph, pop_size, DNA_size, t):
         for each in route:
             print(int(each),"->",end= "")
         print("0")
-        print("遗传算法最短近似路程为 {best_distance}")
-        plt.plot(t,d,'r')
+        print("遗传算法最短近似路程为", {best_distance})
+        plt.plot(range(t),d,'r')
         plt.show()
+
