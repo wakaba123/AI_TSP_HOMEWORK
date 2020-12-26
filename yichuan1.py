@@ -1,5 +1,6 @@
 import numpy as np
 import  copy
+import matplotlib.pyplot as plt
 np.random.seed(114514)
 
 
@@ -75,6 +76,7 @@ class yichuan():
                 e[position[0]], e[position[1]] = e[position[1]], e[position[0]]
 
 
+
 def init_pop(pop_size, DNA_size):
         # 初始化一个种群 大小为pop_size*DNA_size
         pop = np.zeros((pop_size, DNA_size))
@@ -91,18 +93,21 @@ def init_pop(pop_size, DNA_size):
 
 
 def TSP(graph, pop_size, DNA_size, t):
+
         # 初始化一个种群
         pop = init_pop(pop_size, DNA_size)
         # 调用遗传算法类
         GA = yichuan(pop, pop_size, DNA_size, graph)
         # 保存最佳距离
         best_distance = 1e6
+        d = []
         # 保存最佳路线
         route = None
         for i in range(t):
             # t-=1
             # 返回适应度，和距离函数
             fitness, dis = GA.compute_fitness(pop)
+            d[i] = dis
             # 选择新的种群
             GA.select_population(fitness)
             # 基因交叉
@@ -120,8 +125,11 @@ def TSP(graph, pop_size, DNA_size, t):
                 best_distance = min(dis)
                 route = DNA
         # 打印最终结果
+        print("遗传算法最短近似路径为：")
         for each in route:
             print(int(each),"->",end= "")
         print("0")
-        print("最短路径为 {best_distance}")
+        print("遗传算法最短近似路程为 {best_distance}")
+        plt.plot(t,d,'r')
+        plt.show
 
