@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import random
 
 
 class Tuihuo:
@@ -43,28 +44,30 @@ class Tuihuo:
         valuebest = valuenow
         tuihuocurrent = tuihuosolution.copy()
         tuihuonow = tuihuosolution.copy()
-        t = 5000  # 初始温度
+        t = 100000  # 初始温度
         t1 = 1  # 最后底线温度
-        r = 0.999  # 降温参数
+        r = 0.9999  # 降温参数
+
         while t > t1:
             # 使用两路扰乱和三路扰乱两种方式
-            p1 = np.random.rand()
+            p1 = random.randrange(0, self.num - 1)
             if p1 > 0.5:  # 使用二路扰乱
                 while 1:
-                    x = np.int(np.ceil(np.random.rand() * (self.num - 1)))
-                    y = np.int(np.ceil(np.random.rand() * (self.num - 1)))  # 生成交换坐标点
+                    x = random.randrange(0, self.num - 1)
+                    y = random.randrange(0, self.num - 1) # 生成交换坐标点
                     if x != y:
                         break
                 tuihuocurrent[x], tuihuocurrent[y] = tuihuocurrent[y], tuihuocurrent[x]
             else:  # 使用三路扰乱
                 while 1:
-                    x = np.int(np.ceil(np.random.rand() * (self.num - 1)))
-                    y = np.int(np.ceil(np.random.rand() * (self.num - 1)))
-                    w = np.int(np.ceil(np.random.rand() * (self.num - 1)))  # 生成交换坐标点
+                    x = random.randrange(0, self.num - 1)
+                    y = random.randrange(0, self.num - 1)
+                    w = random.randrange(0, self.num - 1)  # 生成交换坐标点
                     if x != y and x != w and y != w:
                         break
                 tuihuocurrent = self.threetuihuo(tuihuocurrent, x, y, w)
             valuethen = self.distance(tuihuocurrent)
+
             # 判断是否接受该解
             if valuethen < valuenow:
                 tuihuonow = tuihuocurrent.copy()
@@ -77,8 +80,10 @@ class Tuihuo:
                 tuihuonow = tuihuocurrent.copy()
             else:
                 tuihuocurrent = tuihuonow.copy()
+
             t = t * r
             result.append(valuenow)
+
         plt.plot(np.array(result))
         plt.ylabel("valuenow")
         plt.xlabel("t")
