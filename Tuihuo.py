@@ -1,5 +1,5 @@
 import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 class Tuihuo:
     path = []
@@ -35,7 +35,7 @@ class Tuihuo:
         return tuihuocurrent
 
     def calculate(self):  # 计算近似最短路径并且将路径存储在path中
-        # result = []   用于生成可视化图表
+        result = []   # 用于生成可视化图表
         tuihuosolution = list(range(self.num))
         valuenow = 0
         valuenow = self.distance(tuihuosolution)
@@ -77,20 +77,20 @@ class Tuihuo:
             else:
                 tuihuocurrent = tuihuonow.copy()
             t = t * r
-            # result.append(valuenow)
-        # plt.plot(np.array(result))
-        # plt.ylabel("valuenow")
-        # plt.xlabel("t")
-        # plt.show()
+            result.append(valuenow)
+        plt.plot(np.array(result))
+        plt.ylabel("valuenow")
+        plt.xlabel("t")
+        plt.show()
         self.value = valuebest
         return tuihuosolution
 
     def print_outcome(self):
         num = self.calculate()
-        print("近似最短路径长度为" + str(self.value))
-        print("近似最短路径为")
+        print("模拟退火算法近似最短路径为")
         print(0, end='')
         for i in range(len(num)):
             if i != 0:
                 print("-> %d"%num[i], end='')
-        print("-> 0", end='')
+        print("-> 0")
+        print("模拟退火算法近似最短路径长度为" + str(self.value))
