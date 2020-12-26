@@ -118,6 +118,10 @@ def TSP(graph, pop_size, DNA_size, t):
                 best_distance = min(dis)
                 route = DNA
         # 打印最终结果
-        print(f"The best route is {route}")
-        print(f"The route distance is {best_distance}")
+        print("遗传算法近似最短路程为:%f"%best_distance)
+        print("遗传算法最短路径为", end='')
+        for i in route:
+            print(str(int(i))+'->', end='')
+        print(0)
+
 

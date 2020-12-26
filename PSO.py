@@ -57,9 +57,12 @@ class Pso:
                 best_bird = temp_bird
                 best_fit = temp_fit
             self.group.upDateBird()
-        print("最短近似路径是:", end='')
-        print(best_bird.addr)
-        print("最短近似路程是", end='')
+        print("粒子群算法最短近似路径是:", end='')
+        for i in best_bird.addr:
+            print(i, end='')
+            print('->',end='')
+        print(0)
+        print("粒子群算法最短近似路程是", end='')
         print(1 / best_fit)
 
     def visualization(self):
@@ -69,12 +72,12 @@ class Pso:
 
 class Bird:
     def __init__(self, addr, city_num):
-        self.addr = addr[:]
-        self.bestAddr = addr[:]
         self.v = []
         self.city_num = city_num
+        self.addr = addr[:]
+        self.bestAddr = addr[:]
         self.fit = calcfit(addr)
-        self.bestFit = calcfit(self.bestAddr)
+        self.bestFit = self.fit
 
     def switch(self, switchq):
         for pair in switchq:
@@ -117,24 +120,27 @@ class Bird:
 
 class Group:
     def __init__(self, num, generation, groupsize):
+        self.group = []
         self.num = num
         self.generation = generation
         self.groupSize = groupsize  # 鸟的个数、粒子个数
+
         self.w = 0.25  # w为惯性系数，也就是保留上次速度的程度
         self.pChange = 0.3  # 变异系数pChange
         self.pReverse = 0.3  # 贪婪倒立变异概率
+
         self.initBirds()
         self.best = self.getBest()
 
-    def initBirds(self):
-        self.group = []
-        addr = [0]
+    def initBirds(self):         # 创建鸟群的函数
+        addr = [0]               # 因为从0开始 , 所以初始位置是0
         for i in range(self.groupSize):
-            addr2 = [i + 1 for i in range(self.num - 1)]
-            random.shuffle(addr2)
+            addr2 = [j+1 for j in range(self.num - 1)]   # 先得到有序的数组
+            random.shuffle(addr2)   # 将其打乱作为初始的路线
             addr.extend(addr2)
-            bird = Bird(addr, self.num)
-            self.group.append(bird)
+            bird = Bird(addr, self.num)  # 以此路线生成一只鸟
+            addr = [0]
+            self.group.append(bird)     # 加进鸟群中
 
     def getBest(self):
         bestFit = 0
@@ -147,16 +153,13 @@ class Group:
                 bestBird = bird
         return bestBird
 
-    def showBest(self):
-        print(1 / self.best.fit)
-        print(self.best.addr)
-
     # 更新每一只鸟的速度和位置
     def upDateBird(self):
         for bird in self.group:
             # g代表group，m代表me，分别代表自己和群组最优、自己最优的差
             deltag = switchB2A(self.best.addr, bird.addr)
             deltam = switchB2A(bird.bestAddr, bird.addr)
+
             newv = multiply(self.w, bird.v)[:] + multiply(random.random(), deltag)[:] + multiply(random.random(),
                                                                                                  deltam)
             bird.switch(newv)
@@ -165,6 +168,6 @@ class Group:
                 bird.change()
             if random.random() < self.pReverse:
                 bird.reverse()
-            # 更新最优的鸟
+            #更新最优的鸟
             if bird.fit > self.best.fit:
                 self.best = bird

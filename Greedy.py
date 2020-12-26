@@ -32,8 +32,9 @@ class Greedy:
 
     def print_outcome(self):
         num = self.calculate()
-        print("近似最短路径长度为 " + str(num))
-        print(0, end='')
+        print("贪心算法近似最短路径长度为 " + str(num))
+
+        print("贪心算法近似最短路径为:0",end='')
         for i in self.path:
             print("->", end='')
             print(i, end='')

@@ -1,7 +1,7 @@
 from Greedy import Greedy
 
 from PSO import Pso
-
+import time
 from yichuan1 import yichuan
 import numpy as np
 
@@ -40,18 +40,24 @@ with open("graphs.txt", "r") as f:
 
 
 if __name__ == '__main__':
-
+    t_start = time.time()
     ans0 = Greedy(graph, num)  # greedy
     ans0.print_outcome()
+    t_end = time.time()
+    print("\n贪心算法时间为:%f\n"%(t_end-t_start))
 
-    ans1 = Pso(graph, num, 10, 10)
-    ans1.get_bestbird()            # yjq's PSO
-    ans1.visualization()
+    ans2 = ACO(graph, num)
+    ans2.startAnt(1000)          # zyf's ACO
 
-    # ans2 = ACO(graph, num)
-    # ans2.startAnt(1000)          # zyf's ACO
+    TSP(graph, 400, num, 30)        # zyx's GA
 
-    TSP(graph,400,num,30)        # zyx's GA
+    t_start = time.time()
+    ans4 = Pso(graph, num, 500, 20)  # yjq's PSO
+    ans4.get_bestbird()
+    ans4.visualization()              # 可视化操作
+    t_end = time.time()
+    print("粒子群算法时间为:%f秒\n" % (t_end - t_start))  # 记录时间
+
 
 
 
