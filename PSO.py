@@ -126,8 +126,8 @@ class Group:
         self.groupSize = groupsize  # 鸟的个数、粒子个数
 
         self.w = 0.25  # w为惯性系数，也就是保留上次速度的程度
-        self.pChange = 0.3  # 变异系数pChange
-        self.pReverse = 0.3  # 贪婪倒立变异概率
+        self.pChange = 0.1  # 变异系数pChange
+        self.pReverse = 0.1  # 贪婪倒立变异概率
 
         self.initBirds()
         self.best = self.getBest()
