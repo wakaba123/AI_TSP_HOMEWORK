@@ -49,11 +49,11 @@ if __name__ == '__main__':
     # ans2 = ACO(graph, num)
     # ans2.startAnt(1000)          # zyf's ACO
 
-    TSP(graph, 400, num, 30)        # zyx's GA
-    print()
+    # TSP(graph, 400, num, 30)        # zyx's GA
+    # print()
 
     t_start = time.time()
-    ans4 = Pso(graph, num, 500, 20)  # yjq's PSO
+    ans4 = Pso(graph, num, 5000, 10)  # yjq's PSO
     ans4.get_bestbird()
     ans4.visualization()              # 可视化操作
     t_end = time.time()
