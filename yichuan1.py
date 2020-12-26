@@ -107,7 +107,6 @@ def TSP(graph, pop_size, DNA_size, t):
             # t-=1
             # 返回适应度，和距离函数
             fitness, dis = GA.compute_fitness(pop)
-
             d.append(min(dis))
             # 选择新的种群
             GA.select_population(fitness)
@@ -120,6 +119,7 @@ def TSP(graph, pop_size, DNA_size, t):
             num = np.argmax(fitness)
             # 记录DNA
             DNA = GA.pop[num, :]
+
             # 保存最佳方案
             if best_distance > min(dis):
                 best_distance = min(dis)
@@ -129,8 +129,7 @@ def TSP(graph, pop_size, DNA_size, t):
         for each in route:
             print(int(each),"->",end= "")
         print("0")
-        print("遗传算法最短近似路程为" ,{best_distance})
-        print(d)
-        plt.plot(range(t),np.array(d),'r')
+        print("遗传算法最短近似路程为 {best_distance}")
+        plt.plot(t,d,'r')
         plt.show()
 
