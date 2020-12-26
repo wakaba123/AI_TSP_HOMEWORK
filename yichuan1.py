@@ -107,7 +107,7 @@ def TSP(graph, pop_size, DNA_size, t):
             # t-=1
             # 返回适应度，和距离函数
             fitness, dis = GA.compute_fitness(pop)
-            d[i] = dis
+            d.append(min(dis))
             # 选择新的种群
             GA.select_population(fitness)
             # 基因交叉
@@ -131,5 +131,5 @@ def TSP(graph, pop_size, DNA_size, t):
         print("0")
         print("遗传算法最短近似路程为 {best_distance}")
         plt.plot(t,d,'r')
-        plt.show
+        plt.show()
 
