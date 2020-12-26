@@ -132,4 +132,3 @@ def TSP(graph, pop_size, DNA_size, t):
         print("遗传算法最短近似路程为 {best_distance}")
         plt.plot(t,d,'r')
         plt.show()
-
