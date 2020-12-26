@@ -57,6 +57,12 @@ if __name__ == '__main__':
     ans4.visualization()              # 可视化操作
     t_end = time.time()
     print("粒子群算法时间为:%f秒\n" % (t_end - t_start))  # 记录时间
+    
+    t_start = time.time()
+    ans5 = Tuihuo(graph, num)  # lwh's SA
+    ans5.print_outcome()
+    t_end = time.time()
+    print("模拟退火算法时间为:%f秒\n" % (t_end - t_start))  # 记录时间
 
 
 
