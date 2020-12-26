@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 class Tuihuo:
     path = []
 
@@ -9,7 +10,7 @@ class Tuihuo:
         self.graph = graph
         self.value = 0
 
-    def output_graph(self):   # 输出初始图
+    def output_graph(self):  # 输出初始图
         for i in self.graph:
             for j in i:
                 print(j, end=',')
@@ -18,8 +19,8 @@ class Tuihuo:
     def distance(self, tuihuocurrent):
         valuenow = 0
         for i in range(self.num - 1):
-            valuenow += self.graph[tuihuocurrent[i]][tuihuocurrent[i+1]]
-        valuenow += self.graph[tuihuocurrent[self.num-1]][0]
+            valuenow += self.graph[tuihuocurrent[i]][tuihuocurrent[i + 1]]
+        valuenow += self.graph[tuihuocurrent[self.num - 1]][0]
         return valuenow
 
     def threetuihuo(self, tuihuocurrent, x, y, w):
@@ -35,27 +36,27 @@ class Tuihuo:
         return tuihuocurrent
 
     def calculate(self):  # 计算近似最短路径并且将路径存储在path中
-        result = []   # 用于生成可视化图表
+        result = []  # 用于生成可视化图表
         tuihuosolution = list(range(self.num))
         valuenow = 0
         valuenow = self.distance(tuihuosolution)
         valuebest = valuenow
         tuihuocurrent = tuihuosolution.copy()
         tuihuonow = tuihuosolution.copy()
-        t = 5000    # 初始温度
+        t = 5000  # 初始温度
         t1 = 1  # 最后底线温度
-        r = 0.999    # 降温参数
+        r = 0.999  # 降温参数
         while t > t1:
             # 使用两路扰乱和三路扰乱两种方式
             p1 = np.random.rand()
-            if p1 > 0.5:    # 使用二路扰乱
+            if p1 > 0.5:  # 使用二路扰乱
                 while 1:
-                    x = np.int(np.ceil(np.random.rand()*(self.num-1)))
-                    y = np.int(np.ceil(np.random.rand()*(self.num-1)))    # 生成交换坐标点
+                    x = np.int(np.ceil(np.random.rand() * (self.num - 1)))
+                    y = np.int(np.ceil(np.random.rand() * (self.num - 1)))  # 生成交换坐标点
                     if x != y:
                         break
                 tuihuocurrent[x], tuihuocurrent[y] = tuihuocurrent[y], tuihuocurrent[x]
-            else:       # 使用三路扰乱
+            else:  # 使用三路扰乱
                 while 1:
                     x = np.int(np.ceil(np.random.rand() * (self.num - 1)))
                     y = np.int(np.ceil(np.random.rand() * (self.num - 1)))
@@ -91,6 +92,6 @@ class Tuihuo:
         print(0, end='')
         for i in range(len(num)):
             if i != 0:
-                print("-> %d"%num[i], end='')
+                print("-> %d" % num[i], end='')
         print("-> 0")
         print("模拟退火算法近似最短路径长度为" + str(self.value))
