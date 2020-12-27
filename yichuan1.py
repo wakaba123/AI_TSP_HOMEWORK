@@ -11,6 +11,7 @@ class yichuan():
         self.pop_size = pop_size#种群大小
         self.DNA_size = DNA_size#城市大小
         self.graph = graph#距离矩阵
+        pass
 
     def compute_fitness(self, pop):
         # 初始化一个空表
@@ -49,7 +50,7 @@ class yichuan():
                 n = np.random.randint(self.pop_size)
                 parent2 = self.pop[n, :]
                 # 随机产生基因交换片段
-                pos = np.random.randint(self.DNA_size-1, size=2)
+                pos = np.random.randint(self.DNA_size, size=2)
                 # 区间左右端点
                 l = min(pos)
                 r = max(pos)
@@ -162,7 +163,7 @@ def TSP(graph, pop_size, DNA_size, t):
         for each in route:
             print(int(each),"->",end= "")
         print("0")
-        print("遗传算法最短近似路程为", {best_distance})
+        print("遗传算法最短近似路程为", best_distance)
         plt.plot(d,'r')
         plt.show()
 
