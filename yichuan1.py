@@ -35,7 +35,10 @@ class yichuan():
                                     p=(fitness / fitness.sum()))
 
         #更新种群
+       #print(self.pop[indx])
         self.pop = self.pop[indx]
+        #print(self.pop)
+
 
     def genetic_crossover(self):
         # 遍历种群每个个体
@@ -75,7 +78,7 @@ class yichuan():
                 # 随机变异交换点
                 position = np.random.randint(self.DNA_size-1, size=2)
                 e[position[0]], e[position[1]] = e[position[1]], e[position[0]]
-
+        pass
 
 
 def init_pop(pop_size, DNA_size):
@@ -118,13 +121,14 @@ def TSP(graph, pop_size, DNA_size, t):
         route = None
 
         for i in range(t):
-            x = 0
+           # x = 0
             # t-=1
             # 返回适应度，和距离函数
-            fitness, dis = GA.compute_fitness(pop)
+            fitness, dis = GA.compute_fitness(GA.pop)
             #d.append(min(dis))
             # 选择新的种群
             GA.select_population(fitness)
+
             # 基因交叉
             GA.genetic_crossover()
             # 基因突变
@@ -138,14 +142,16 @@ def TSP(graph, pop_size, DNA_size, t):
             num = np.argmax(fitness)
             # 记录DNA
             DNA = GA.pop[num, :]
-            #print(DNA)
-            for j in range(DNA_size-2):
-              x += graph[int(DNA[j])][int(DNA[j+1])]
-            d.append(x)
+           # print(num)
+           # for j in range(DNA_size-2):
+             # x += graph[int(DNA[j])][int(DNA[j+1])]
+            d.append(min(dis))
+            #print(min(dis))
+            #print(pop)
             #print(d)
             # 保存最佳方案
-            if best_distance > min(d):
-                best_distance = min(d)
+            if best_distance > min(dis):
+                best_distance = min(dis)
                 route = DNA
         # 打印最终结果
         print("遗传算法最短近似路径为：")
