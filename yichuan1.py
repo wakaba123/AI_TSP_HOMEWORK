@@ -17,9 +17,11 @@ class yichuan():
         fitness = np.zeros(self.pop_size, dtype=np.float32)
         # 枚举每个个体
         for i, e in enumerate(pop):
-            for j in range(self.DNA_size-1):
+            for j in range(self.DNA_size-2):
                # print(fitness)
                 fitness[i] += self.graph[int(e[j])][int(e[j+1])]
+            fitness[i] += self.graph[0][int(e[0])]
+            fitness[i] += self.graph[self.DNA_size-2][0]
         # 记录距离
         dis = copy.copy(fitness)
         # 适应度等于距离的倒数
@@ -52,7 +54,7 @@ class yichuan():
                 seq = copy.copy(parent1[l:r])
                 poss = []
                 # 交换
-                for i in range(self.DNA_size):
+                for i in range(self.DNA_size-1):
                     if parent2[i] in seq:
                         poss.append(i)
                 a = 0
@@ -71,20 +73,30 @@ class yichuan():
             # 变异的可能
             if np.random.rand() < self.mutation_rate:
                 # 随机变异交换点
-                position = np.random.randint(self.DNA_size, size=2)
+                position = np.random.randint(self.DNA_size-1, size=2)
                 e[position[0]], e[position[1]] = e[position[1]], e[position[0]]
 
 
 
 def init_pop(pop_size, DNA_size):
-        # 初始化一个种群 大小为pop_size*DNA_size
-        pop = np.zeros((pop_size, DNA_size))
+        # 初始化一个种群 大小为pop_size*DNA_size-1
+        pop = np.zeros((pop_size, DNA_size-1))
         # DNA编码
-        code = np.arange(DNA_size)
-        for i in range(pop_size):
-            pop[i] = copy.deepcopy(code)
+        code = np.arange(1,DNA_size)
+        for k in range(pop_size):
+            pop[k] = copy.deepcopy(code)
             # 随机打乱
-            np.random.shuffle(pop[i])
+            np.random.shuffle(pop[k])
+            #while(pop[k][0] == 0):
+              #  pop[k][0] = np.random.randint(1,DNA_size,1)
+           # for i in range(1,DNA_size-1):
+               # pop[k][i] = np.random.randint(1,DNA_size,1)
+               # for j in range(i+1):
+               #     if pop[k][i] == pop[k][j]:
+                #        break
+                #if j == i:
+               #     i += 1
+               # i -= 1
             #b = np.where(pop[i] == 0)
             #pop[i][0],pop[i][b] = pop[i][b],pop[i][0]
         # 返回种群
@@ -117,9 +129,9 @@ def TSP(graph, pop_size, DNA_size, t):
             GA.genetic_crossover()
             # 基因突变
             GA.genetic_mutation()
-            for k in range(pop_size):
-                b = np.where(pop[k] == 0)
-                pop[k][0], pop[k][b] = pop[k][b], pop[k][0]
+           # for k in range(pop_size):
+            #    b = np.where(pop[k] == 0)
+            #    pop[k][0], pop[k][b] = pop[k][b], pop[k][0]
 
             # 记录当前状态最优解
             # 返回最优解索引
@@ -127,7 +139,7 @@ def TSP(graph, pop_size, DNA_size, t):
             # 记录DNA
             DNA = GA.pop[num, :]
             #print(DNA)
-            for j in range(DNA_size-1):
+            for j in range(DNA_size-2):
               x += graph[int(DNA[j])][int(DNA[j+1])]
             d.append(x)
             #print(d)
@@ -137,9 +149,10 @@ def TSP(graph, pop_size, DNA_size, t):
                 route = DNA
         # 打印最终结果
         print("遗传算法最短近似路径为：")
+        print("0 ->",end="")
         for each in route:
             print(int(each),"->",end= "")
-        #print("0")
+        print("0")
         print("遗传算法最短近似路程为", {best_distance})
         plt.plot(d,'r')
         plt.show()
