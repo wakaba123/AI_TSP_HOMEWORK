@@ -49,7 +49,7 @@ if __name__ == '__main__':
     # ans2 = ACO(graph, num)
     # ans2.startAnt(1000)          # zyf's ACO
     t_start = time.time()
-    TSP(graph, 400, num, 300)        # zyx's GA
+    TSP(graph, 400, num, 30)        # zyx's GA
     t_end = time.time()
     print("遗传算法时间为:%f秒\n" % (t_end - t_start))
 

@@ -49,7 +49,7 @@ class yichuan():
                 n = np.random.randint(self.pop_size)
                 parent2 = self.pop[n, :]
                 # 随机产生基因交换片段
-                pos = np.random.randint(self.DNA_size, size=2)
+                pos = np.random.randint(self.DNA_size-1, size=2)
                 # 区间左右端点
                 l = min(pos)
                 r = max(pos)
@@ -87,7 +87,10 @@ def init_pop(pop_size, DNA_size):
         # DNA编码
         code = np.arange(1,DNA_size)
         for k in range(pop_size):
+            #tem = np.arange(1,DNA_size)
             pop[k] = copy.deepcopy(code)
+           # pop[k,1:DNA_size] = np.random.permutation(tem)
+           # pop[k,0] = 0
             # 随机打乱
             np.random.shuffle(pop[k])
             #while(pop[k][0] == 0):
