@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 class yichuan():
-    def __init__(self,pop,pop_size,DNA_size,graph,crossover_rate = 0.1555,mutation_rate=0.025):
+    def __init__(self,pop,pop_size,DNA_size,graph,crossover_rate = 0.0555,mutation_rate=0.0025):
         self.crossover_rate = crossover_rate#交叉概率
         self.mutation_rate = mutation_rate# 变异概率
         self.pop = pop#种群
