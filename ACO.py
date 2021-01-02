@@ -113,7 +113,7 @@ class ACO:
     def initAnt(self):
         i = 0
         tmpAnt = Ant(self.graph, self.num)
-        print(self.initN, "只先锋蚂蚁正在探路")
+        #print(self.initN, "只先锋蚂蚁正在探路")
         while (i < self.initN):
             i += 1
             tmpTour = [i for i in range(1, self.num)]
@@ -139,7 +139,7 @@ class ACO:
             if (ant.fit > self.bestFit):
                 self.bestFit = ant.fit
                 self.bestTour = ant.tabu
-            print(i, ":", 1 / self.bestFit)
+            #print(i, ":", 1 / self.bestFit)
             ant.clear()
             Gen.append(i)
             distance.append(1 / self.bestFit)
