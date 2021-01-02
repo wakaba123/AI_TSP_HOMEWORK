@@ -4,7 +4,7 @@ from PSO import Pso
 import time
 from yichuan1 import yichuan
 import numpy as np
-
+import matplotlib.pyplot as plt
 from yichuan1 import TSP
 from ACO import ACO
 
@@ -40,34 +40,33 @@ with open("graphs.txt", "r") as f:
 
 
 if __name__ == '__main__':
-    t_start = time.time()
-    ans0 = Greedy(graph, num)  # greedy
-    ans0.print_outcome()
-    t_end = time.time()
-    print("\n贪心算法时间为:%f\n"%(t_end-t_start))
-
-    t_start = time.time()
-    ans2 = ACO(graph, num)
-    ans2.startAnt(100)
-    t_end = time.time()
-    print("蚁群算法时间为:%f秒\n" % (t_end - t_start))# zyf's ACO
+    # t_start = time.time()
+    # ans0 = Greedy(graph, num)  # greedy
+    # ans0.print_outcome()
+    # t_end = time.time()
+    # print("\n贪心算法时间为:%f\n"%(t_end-t_start))
+    #
+    # t_start = time.time()
+    # ans2 = ACO(graph, num)
+    # ans2.startAnt(100)
+    # t_end = time.time()
+    # print("蚁群算法时间为:%f秒\n" % (t_end - t_start))# zyf's ACO
 
     # TSP(graph, 400, num, 30)        # zyx's GA
     # print()
 
     t_start = time.time()
-    ans4 = Pso(graph, num, 5000, 10)  # yjq's PSO
+    ans4 = Pso(graph, num, 10000, 20)  # yjq's PSO
     ans4.get_bestbird()
     ans4.visualization()              # 可视化操作
     t_end = time.time()
     print("粒子群算法时间为:%f秒\n" % (t_end - t_start))  # 记录时间
-    
-    t_start = time.time()
-    ans5 = Tuihuo(graph, num)  # lwh's SA
-    ans5.print_outcome()
-    t_end = time.time()
-    print("模拟退火算法时间为:%f秒\n" % (t_end - t_start))  # 记录时间
 
+    # t_start = time.time()
+    # ans5 = Tuihuo(graph, num)  # lwh's SA
+    # ans5.print_outcome()
+    # t_end = time.time()
+    # print("模拟退火算法时间为:%f秒\n" % (t_end - t_start))  # 记录时间
 
 
 
