@@ -46,7 +46,7 @@ class Tuihuo:
         tuihuonow = tuihuosolution.copy()
         t = 100000  # 初始温度
         t1 = 1  # 最后底线温度
-        r = 0.9999  # 降温参数
+        r = 0.99999  # 降温参数
 
         while t > t1:
             # 使用两路扰乱和三路扰乱两种方式
