@@ -50,19 +50,19 @@ class Tuihuo:
 
         while t > t1:
             # 使用两路扰乱和三路扰乱两种方式
-            p1 = random.randrange(0, self.num - 1)
+            p1 = np.random.rand()
             if p1 > 0.5:  # 使用二路扰乱
                 while 1:
-                    x = random.randrange(0, self.num - 1)
-                    y = random.randrange(0, self.num - 1) # 生成交换坐标点
+                    x = random.randrange(1, self.num - 1)
+                    y = random.randrange(1, self.num - 1) # 生成交换坐标点
                     if x != y:
                         break
                 tuihuocurrent[x], tuihuocurrent[y] = tuihuocurrent[y], tuihuocurrent[x]
             else:  # 使用三路扰乱
                 while 1:
-                    x = random.randrange(0, self.num - 1)
-                    y = random.randrange(0, self.num - 1)
-                    w = random.randrange(0, self.num - 1)  # 生成交换坐标点
+                    x = random.randrange(1, self.num - 1)
+                    y = random.randrange(1, self.num - 1)
+                    w = random.randrange(1, self.num - 1)  # 生成交换坐标点
                     if x != y and x != w and y != w:
                         break
                 tuihuocurrent = self.threetuihuo(tuihuocurrent, x, y, w)
