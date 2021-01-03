@@ -2,10 +2,7 @@ from Greedy import Greedy
 from Tuihuo import Tuihuo
 from PSO import Pso
 import time
-from yichuan1 import yichuan
-import numpy as np
-import matplotlib.pyplot as plt
-from yichuan1 import TSP
+from GA import GA
 from ACO import ACO
 
 
@@ -48,12 +45,16 @@ if __name__ == '__main__':
 
     t_start = time.time()
     ans2 = ACO(graph, num)
-    ans2.startAnt(15)
+    ans2.startAnt(2)
     t_end = time.time()
     print("蚁群算法时间为:%f秒\n" % (t_end - t_start))# zyf's ACO
 
-    TSP(graph, 400, num, 30)        # zyx's GA
-    print()
+    t_start = time.time()
+    ga = GA(graph, 20, num)
+    ga.run(15000)
+    print("遗传算法最短近似路程为：", 1 / ga.group.getBest().fit)
+    t_end = time.time()
+    print("遗传算法时间为:%f秒\n" % (t_end - t_start))
 
     t_start = time.time()
     ans4 = Pso(graph, num, 10000, 20)  # yjq's PSO
