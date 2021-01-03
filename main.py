@@ -1,5 +1,5 @@
 from Greedy import Greedy
-from Tuihuo import Tuihuo
+from SA import Tuihuo
 from PSO import Pso
 import time
 from GA import GA
@@ -29,7 +29,7 @@ def creat_graph(edges, num):
     return a   #邻接矩阵,城市个数
 
 
-with open("graphs.txt", "r") as f:
+with open("graphs150.txt", "r") as f:
     num = f.readline()
     num = int(num)
     lines = f.readlines()
@@ -43,11 +43,11 @@ if __name__ == '__main__':
     t_end = time.time()
     print("\n贪心算法时间为:%f\n"%(t_end-t_start))
 
-    t_start = time.time()
-    ans2 = ACO(graph, num)
-    ans2.startAnt(2)
-    t_end = time.time()
-    print("蚁群算法时间为:%f秒\n" % (t_end - t_start))# zyf's ACO
+    # t_start = time.time()
+    # ans2 = ACO(graph, num)
+    # ans2.startAnt(10)
+    # t_end = time.time()
+    # print("蚁群算法时间为:%f秒\n" % (t_end - t_start))# zyf's ACO
 
     t_start = time.time()
     ga = GA(graph, 20, num)
