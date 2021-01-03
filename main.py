@@ -1,9 +1,9 @@
 from Greedy import Greedy
 from SA import Tuihuo
 from PSO import Pso
-import time
 from GA import GA
 from ACO import ACO
+import time
 
 
 INF = 1e10
@@ -29,7 +29,7 @@ def creat_graph(edges, num):
     return a   #邻接矩阵,城市个数
 
 
-with open("graphs150.txt", "r") as f:
+with open("graphs.txt", "r") as f:
     num = f.readline()
     num = int(num)
     lines = f.readlines()
@@ -41,31 +41,31 @@ if __name__ == '__main__':
     ans0 = Greedy(graph, num)  # greedy
     ans0.print_outcome()
     t_end = time.time()
-    print("\n贪心算法时间为:%f\n"%(t_end-t_start))
-
-    # t_start = time.time()
-    # ans2 = ACO(graph, num)
-    # ans2.startAnt(10)
-    # t_end = time.time()
-    # print("蚁群算法时间为:%f秒\n" % (t_end - t_start))# zyf's ACO
+    print("\n贪心算法时间为:%f\n"% (t_end-t_start))
 
     t_start = time.time()
-    ga = GA(graph, 20, num)
-    ga.run(15000)
-    print("遗传算法最短近似路程为：", 1 / ga.group.getBest().fit)
+    ans1 = ACO(graph, num)
+    ans1.startAnt(10)
+    t_end = time.time()
+    print("蚁群算法时间为:%f秒\n" % (t_end - t_start))   # zyf's ACO
+
+    t_start = time.time()
+    ans2 = GA(graph, 20, num)
+    ans2.run(15000)
+    print("遗传算法最短近似路程为：", 1 / ans2.group.getBest().fit)
     t_end = time.time()
     print("遗传算法时间为:%f秒\n" % (t_end - t_start))
 
     t_start = time.time()
-    ans4 = Pso(graph, num, 10000, 20)  # yjq's PSO
-    ans4.get_bestbird()
-    ans4.visualization()              # 可视化操作
+    ans3 = Pso(graph, num, 10000, 20)  # yjq's PSO
+    ans3.get_bestbird()
+    ans3.visualization()              # 可视化操作
     t_end = time.time()
     print("粒子群算法时间为:%f秒\n" % (t_end - t_start))  # 记录时间
 
     t_start = time.time()
-    ans5 = Tuihuo(graph, num)  # lwh's SA
-    ans5.print_outcome()
+    ans4 = Tuihuo(graph, num)  # lwh's SA
+    ans4.print_outcome()
     t_end = time.time()
     print("模拟退火算法时间为:%f秒\n" % (t_end - t_start))  # 记录时间
 

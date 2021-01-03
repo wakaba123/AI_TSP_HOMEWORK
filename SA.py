@@ -93,7 +93,7 @@ class Tuihuo:
 
     def print_outcome(self):
         num = self.calculate()
-        print("模拟退火算法近似最短路径为")
+        print("模拟退火算法近似最短路径为",end='')
         print(0, end='')
         for i in range(len(num)):
             if i != 0:
